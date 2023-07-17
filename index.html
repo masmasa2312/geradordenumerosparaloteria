@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Números para Lotofácil, Quina e Mega Sena</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: orangered;
+    }
+
+    label {
+      color: blue;
+      display: block;
+      margin-top: 20px;
+    }
+    
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    
+    #resultMegaSena, #resultQuina, #resultLotofacil {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gerador Lotofácil, Quina e Mega Sena</h1>
+    
+    <label for="quantityMegaSena">Quantidade de números para Mega Sena:</label>
+    <input type="number" id="quantityMegaSena" min="6" max="15">
+    <button onclick="generateNumbers('MegaSena')">Gerar Mega Sena</button>
+    <div id="resultMegaSena"></div>
+
+    <label for="quantityQuina">Quantidade de números para Quina:</label>
+    <input type="number" id="quantityQuina" min="5" max="15">
+    <button onclick="generateNumbers('Quina')">Gerar Quina</button>
+    <div id="resultQuina"></div>
+
+    <label for="quantityLotofacil">Quantidade de números para Lotofácil:</label>
+    <input type="number" id="quantityLotofacil" min="1" max="20">
+    <button onclick="generateNumbers('Lotofacil')">Gerar Lotofácil</button>
+    <div id="resultLotofacil"></div>
+  </div>
+
+  <script>
+    function generateNumbers(game) {
+      var quantityInput;
+      var resultDiv;
+
+      if (game === 'MegaSena') {
+        quantityInput = document.getElementById('quantityMegaSena');
+        resultDiv = document.getElementById('resultMegaSena');
+      } else if (game === 'Quina') {
+        quantityInput = document.getElementById('quantityQuina');
+        resultDiv = document.getElementById('resultQuina');
+      } else if (game === 'Lotofacil') {
+        quantityInput = document.getElementById('quantityLotofacil');
+        resultDiv = document.getElementById('resultLotofacil');
+      }
+
+      var quantity = parseInt(quantityInput.value);
+
+      if (game === 'MegaSena' && (quantity < 6 || quantity > 15)) {
+        alert('Por favor, escolha um número entre 6 e 15 para a Mega Sena.');
+        return;
+      } else if (game === 'Quina' && (quantity < 5 || quantity > 15)) {
+        alert('Por favor, escolha um número entre 5 e 15 para a Quina.');
+        return;
+      } else if (game === 'Lotofacil' && (quantity < 1 || quantity > 20)) {
+        alert('Por favor, escolha um número entre 1 e 20 para a Lotofácil.');
+        return;
+      }
+
+      var numbers = [];
+
+      while (numbers.length < quantity) {
+        var random = Math.floor(Math.random() * 25) + 1;
+
+        if (!numbers.includes(random)) {
+          numbers.push(random);
+        }
+      }
+
+      resultDiv.innerHTML = numbers.join(', ');
+    }
+  </script>
+</body>
+</html>
